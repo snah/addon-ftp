@@ -20,6 +20,9 @@ for user in $(bashio::config 'users|keys'); do
         fi
     done
 
+    mkdir "/ftproot/users/${username}/data"
+    mount --rbind "/data" "/ftproot/users/${username}/data"
+
     if bashio::config.true "users[${user}].allow_chmod"; then
         echo 'chmod_enable=YES' >> "/etc/vsftpd/users/${username}"
     fi
